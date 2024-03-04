@@ -105,8 +105,8 @@ class Partner(models.Model):
             vat_len = len(vat)
             startswith_4 = vat.startswith("4")
             is_dominican_partner = partner.country_code == "DO"
-            upper_name = partner.name.upper()
-
+            if partner.name:
+                upper_name = partner.name.upper()
             if not is_dominican_partner:
                 partner.l10n_do_dgii_tax_payer_type = "foreigner"
 
