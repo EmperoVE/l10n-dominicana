@@ -21,7 +21,7 @@ class AccountMoveLine(models.Model):
 
             if line.move_id.is_ecf_invoice:
                 line_itbis_taxes = line.tax_ids.filtered(
-                    lambda t: t.tax_group_id == self.env.ref("l10n_do.group_itbis")
+                    lambda t: t.tax_group_id == self.env.ref("account.1_group_itbis")
                 )
                 price_unit = line.price_unit
                 if line.discount:
@@ -35,8 +35,8 @@ class AccountMoveLine(models.Model):
                 )
 
     def _get_l10n_do_line_amounts(self):
-        group_itbis = self.env.ref("l10n_do.group_itbis")
-        group_isr = self.env.ref("l10n_do.group_isr")
+        group_itbis = self.env.ref("account.1_group_itbis")
+        group_isr = self.env.ref("account.1_group_isr")
 
         tax_lines = self.filtered(
             lambda x: x.tax_group_id.id

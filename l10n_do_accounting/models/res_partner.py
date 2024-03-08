@@ -101,16 +101,18 @@ class Partner(models.Model):
     def _compute_l10n_do_dgii_payer_type(self):
         """Compute the type of partner depending on soft decisions"""
         for partner in self:
+            upper_name = ''
             vat = partner.vat or partner.name
-            vat_len = len(vat)
-            startswith_4 = vat.startswith("4")
+            if vat:
+                vat_len = len(vat)
+                startswith_4 = vat.startswith("4")
             is_dominican_partner = partner.country_code == "DO"
             if partner.name:
                 upper_name = partner.name.upper()
             if not is_dominican_partner:
                 partner.l10n_do_dgii_tax_payer_type = "foreigner"
 
-            elif is_dominican_partner and vat.isdigit():
+            elif is_dominican_partner and vat and vat.isdigit():
                 if vat_len in (9, 11):
                     if vat_len == 11:
                         partner.l10n_do_dgii_tax_payer_type = "non_payer"
