@@ -74,7 +74,6 @@
                 <field name="l10n_do_ecf_security_code"
                     invisible="not partner_id
                                or country_code != 'DO'
-                               or not l10n_latam_manual_document_number
                                or not is_ecf_invoice"/>
             </xpath>
 
